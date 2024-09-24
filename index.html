@@ -3,17 +3,107 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Springtime In Michigan</title>
-    <!-- You will need to link to the CSS file -->
+    <title>CRUD</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
 
   <body>
-    <!-- <div>
-      <div class="mx-auto d-flex">
-        <input type="text" />
-        <input type="text" />
-        <input type="text" />
+    <div class="container my-5 shadow-sm">
+      <h3 class="text-center mb-3">Product Management System</h3>
+
+      <!-- Form to add or update a product -->
+      <div class="mb-3">
+        <label for="productNameInput" class="form-label">Product Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="productNameInput"
+          placeholder="Enter product name"
+        />
+        <div id="productNameAlert" class="alert alert-danger mt-2 d-none">
+          Product name must start with a capital letter and be between 3-20
+          characters.
+        </div>
       </div>
-    </div> -->
+
+      <div class="mb-3">
+        <label for="productPriceInput" class="form-label">Product Price</label>
+        <input
+          type="text"
+          class="form-control"
+          id="productPriceInput"
+          placeholder="Enter product price"
+        />
+        <div id="productPriceAlert" class="alert alert-danger mt-2 d-none">
+          Product price must be a positive number.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="productCategoryInput" class="form-label"
+          >Product Category</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="productCategoryInput"
+          placeholder="Enter product category"
+        />
+        <div id="productCategoryAlert" class="alert alert-danger mt-2 d-none">
+          Product category is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="productDescInput" class="form-label"
+          >Product Description</label
+        >
+        <textarea
+          class="form-control"
+          id="productDescInput"
+          rows="2"
+          placeholder="Enter product description"
+        ></textarea>
+        <div id="productDescAlert" class="alert alert-danger mt-2 d-none">
+          Product description is required.
+        </div>
+      </div>
+
+      <button id="addBtn" class="btn btn-primary">Add Product</button>
+
+      <hr />
+
+      <!-- Search bar -->
+      <div class="mb-3 w-50 mx-auto shadow-sm">
+        <input
+          type="text"
+          class="form-control"
+          id="searchInput"
+          placeholder="Search for a Product..."
+          onkeyup="display()"
+        />
+      </div>
+
+      <!-- Table to display products -->
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

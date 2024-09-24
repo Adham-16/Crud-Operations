@@ -13,9 +13,12 @@
     var updateMood = false;
     var maineIndex ;
     
+addBtn.addEventListener("click", function () {
+    addProduct()
+})
+
 function addProduct(){
     productValidate()
-    productCategoryValidate()
     if (validation()  ) {
         if (!updateMood) {
         arrProduct.push( getProduct());
@@ -28,10 +31,13 @@ function addProduct(){
     }
 
 function display() {
-    var searchTerm = searchInput.value;
+    var searchTerm = searchInput.value.toLowerCase();
     var stack=""
     for (var i = 0; i < arrProduct.length; i++) {
-        if (arrProduct[i].name.toLowerCase().includes(searchTerm.toLowerCase())) {
+        if (arrProduct[i].name.toLowerCase().includes(searchTerm) ||
+            arrProduct[i].price.toString().includes(searchTerm) ||
+            arrProduct[i].category.toLowerCase().includes(searchTerm) ||
+            arrProduct[i].desc.toLowerCase().includes(searchTerm)) {
         stack  +=   `<tr>
             <td> ${i} </td>
             <td>${arrProduct[i].name}</td>
@@ -49,6 +55,10 @@ document.getElementById("tableBody").innerHTML= stack;
             productPriceInput.value ="";
             productCategoryInput.value="";
             productDescInput.value="";
+            productNameAlert.classList.add("d-none");
+            productPriceAlert.classList.add("d-none");
+            productCategoryAlert.classList.add("d-none");
+            productDescAlert.classList.add("d-none");
         }
         function change() {
             localStorage.setItem("arrProduct",JSON.stringify(arrProduct))
@@ -69,6 +79,10 @@ document.getElementById("tableBody").innerHTML= stack;
             productCategoryInput.value =  arrProduct[index].category
             productDescInput.value =  arrProduct[index].desc
             addBtn.innerHTML="Update";
+            productNameAlert.classList.add("d-none");
+            productPriceAlert.classList.add("d-none");
+            productCategoryAlert.classList.add("d-none");
+            productDescAlert.classList.add("d-none");
             
         }
         function update(Product) {
