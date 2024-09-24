@@ -4,6 +4,7 @@
 It looks like a product management app with features like adding, updating, and deleting products, as well as form validation. Here's a quick overview of what My code does :
 
 Key Features:
+
 1- Adding Products:
   The (addProduct) function checks if inputs are valid before pushing a new product to arrProduct.
   
