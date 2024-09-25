@@ -55,10 +55,7 @@ document.getElementById("tableBody").innerHTML= stack;
             productPriceInput.value ="";
             productCategoryInput.value="";
             productDescInput.value="";
-            productNameAlert.classList.add("d-none");
-            productPriceAlert.classList.add("d-none");
-            productCategoryAlert.classList.add("d-none");
-            productDescAlert.classList.add("d-none");
+            clearErrors()
         }
         function change() {
             localStorage.setItem("arrProduct",JSON.stringify(arrProduct))
@@ -79,11 +76,14 @@ document.getElementById("tableBody").innerHTML= stack;
             productCategoryInput.value =  arrProduct[index].category
             productDescInput.value =  arrProduct[index].desc
             addBtn.innerHTML="Update";
+            
+            clearErrors()
+        }
+        function clearErrors() {
             productNameAlert.classList.add("d-none");
             productPriceAlert.classList.add("d-none");
             productCategoryAlert.classList.add("d-none");
             productDescAlert.classList.add("d-none");
-            
         }
         function update(Product) {
             arrProduct.splice(maineIndex,1,Product)
