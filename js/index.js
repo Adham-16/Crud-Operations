@@ -16,6 +16,12 @@
 addBtn.addEventListener("click", function () {
     addProduct()
 })
+document.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    addProduct(); // Call the addProduct function on pressing Enter
+  }
+});
 
 function addProduct(){
     productValidate()
@@ -103,8 +109,8 @@ document.getElementById("tableBody").innerHTML= stack;
     function validation() {
         return /^[A-Z][\w ]{2,19}$/.test(productNameInput.value)
         &&/^[1-9][0-9]*$/.test(productPriceInput.value) 
-        && !productCategoryInput.value==""
-        && !productDescInput.value==""
+        && productCategoryInput.value !== ""
+        && productDescInput.value !== ""
     }
 
     function productValidate() {
