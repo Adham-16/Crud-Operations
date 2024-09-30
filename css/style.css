@@ -2,3 +2,13 @@
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+.container input::placeholder,
+.container textarea::placeholder {
+  font-weight: 600;
+}
+table tbody tr td.image {
+  width: 20%;
+}
+table tbody tr td img {
+  width: 10%;
+}

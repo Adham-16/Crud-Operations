@@ -2,12 +2,15 @@
     var productPriceInput = document.getElementById("productPriceInput");
     var productCategoryInput = document.getElementById("productCategoryInput");
     var productDescInput = document.getElementById("productDescInput");
+    var productImage = document.getElementById("productImage");
+    var imagePreview = document.getElementById('imagePreview');
     var addBtn = document.getElementById("addBtn");
     var searchInput = document.getElementById("searchInput");
     var productNameAlert = document.getElementById("productNameAlert");
     var productPriceAlert = document.getElementById("productPriceAlert");
     var productCategoryAlert =document.getElementById("productCategoryAlert");
     var productDescAlert = document.getElementById("productDescAlert");
+    var productImageAlert = document.getElementById("productImageAlert")
     var arrProduct = JSON.parse(localStorage.getItem("arrProduct")) ?? [];
     display();
     var updateMood = false;
@@ -17,10 +20,10 @@ addBtn.addEventListener("click", function () {
     addProduct()
 })
 document.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    addProduct(); // Call the addProduct function on pressing Enter
-  }
+  if (event.key === "Enter" && validation()) {
+        event.preventDefault();
+        addProduct();
+    }
 });
 
 function addProduct(){
@@ -50,6 +53,7 @@ function display() {
             <td>${arrProduct[i].price}</td>
             <td>${arrProduct[i].category}</td>
             <td>${arrProduct[i].desc}</td>
+            <td class="image"><img src="${arrProduct[i].image}" alt="productImage" style="max-width: 100px;"></td>
             <td><button onclick="semiUpdate(${i})"  class="btn btn-outline-warning">Update</button></td>
             <td><button onclick="deleteProduct(${i})" class="btn btn-outline-danger">Delete</button></td>
             </tr>`
@@ -61,6 +65,7 @@ document.getElementById("tableBody").innerHTML= stack;
             productPriceInput.value ="";
             productCategoryInput.value="";
             productDescInput.value="";
+            productImage.value ="";
             clearErrors()
         }
         function change() {
@@ -75,21 +80,23 @@ document.getElementById("tableBody").innerHTML= stack;
             updateMood =false;
         }
         function semiUpdate(index) {
+            clearErrors()
             updateMood=true
             maineIndex =index;
+            addBtn.innerHTML="Update";
             productNameInput.value = arrProduct[index].name
             productPriceInput.value =  arrProduct[index].price
             productCategoryInput.value =  arrProduct[index].category
             productDescInput.value =  arrProduct[index].desc
-            addBtn.innerHTML="Update";
+            productImage.value = arrProduct[index].image;
             
-            clearErrors()
         }
         function clearErrors() {
             productNameAlert.classList.add("d-none");
             productPriceAlert.classList.add("d-none");
             productCategoryAlert.classList.add("d-none");
             productDescAlert.classList.add("d-none");
+            productImageAlert.classList.add("d-none");
         }
         function update(Product) {
             arrProduct.splice(maineIndex,1,Product)
@@ -103,6 +110,7 @@ document.getElementById("tableBody").innerHTML= stack;
             price : productPriceInput.value,
             category : productCategoryInput.value,
             desc : productDescInput.value,
+            image: productImage.files.length > 0 ? imagePreview.src : arrProduct[maineIndex].image,
         }
         return Product;
         }
@@ -111,6 +119,7 @@ document.getElementById("tableBody").innerHTML= stack;
         &&/^[1-9][0-9]*$/.test(productPriceInput.value) 
         && productCategoryInput.value !== ""
         && productDescInput.value !== ""
+        && productImage.value !== ""
     }
 
     function productValidate() {
@@ -124,14 +133,22 @@ document.getElementById("tableBody").innerHTML= stack;
     }else{
         productPriceAlert.classList.remove("d-none")
     }
-    if (!productCategoryInput.value=="") {
+    if (productCategoryInput.value !=="") {
         productCategoryAlert.classList.add("d-none")
     }else{
         productCategoryAlert.classList.remove("d-none")
     }
-    if (!productDescInput.value=="") {
+    if (productDescInput.value !=="") {
         productDescAlert.classList.add("d-none")
     }else{
         productDescAlert.classList.remove("d-none")
     }
+    if (productImage.value !=="") {
+        productImageAlert.classList.add("d-none")
+    }else{
+        productImageAlert.classList.remove("d-none")
+    }
 }
+productImage.addEventListener('change', function () {
+    imagePreview.src = window.URL.createObjectURL(this.files[0]); 
+});

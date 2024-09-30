@@ -11,15 +11,13 @@
   <body>
     <div class="container my-5 shadow-sm">
       <h3 class="text-center mb-3">Product Management System</h3>
-
       <!-- Form to add or update a product -->
       <div class="mb-3">
-        <label for="productNameInput" class="form-label">Product Name</label>
         <input
           type="text"
           class="form-control"
           id="productNameInput"
-          placeholder="Enter product name"
+          placeholder="Enter Product Name ..."
         />
         <div id="productNameAlert" class="alert alert-danger mt-2 d-none">
           Product name must start with a capital letter and be between 3-20
@@ -28,12 +26,11 @@
       </div>
 
       <div class="mb-3">
-        <label for="productPriceInput" class="form-label">Product Price</label>
         <input
           type="text"
           class="form-control"
           id="productPriceInput"
-          placeholder="Enter product price"
+          placeholder="Enter Product Price ..."
         />
         <div id="productPriceAlert" class="alert alert-danger mt-2 d-none">
           Product price must be a positive number.
@@ -41,14 +38,11 @@
       </div>
 
       <div class="mb-3">
-        <label for="productCategoryInput" class="form-label"
-          >Product Category</label
-        >
         <input
           type="text"
           class="form-control"
           id="productCategoryInput"
-          placeholder="Enter product category"
+          placeholder="Enter Product Category ..."
         />
         <div id="productCategoryAlert" class="alert alert-danger mt-2 d-none">
           Product category is required.
@@ -56,17 +50,33 @@
       </div>
 
       <div class="mb-3">
-        <label for="productDescInput" class="form-label"
-          >Product Description</label
-        >
         <textarea
           class="form-control"
           id="productDescInput"
-          rows="2"
-          placeholder="Enter product description"
+          rows="1"
+          placeholder="Enter Product Description ..."
         ></textarea>
         <div id="productDescAlert" class="alert alert-danger mt-2 d-none">
           Product description is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="file"
+          class="form-control"
+          id="productImage"
+          placeholder="Enter Product Image ..."
+        />
+        <img
+          id="imagePreview"
+          src="#"
+          alt="Image Preview"
+          class="img-thumbnail mt-2"
+          style="display: none; max-width: 150px"
+        />
+        <div id="productImageAlert" class="alert alert-danger mt-2 d-none">
+          Product Image is required.
         </div>
       </div>
 
@@ -95,6 +105,7 @@
               <th>Price</th>
               <th>Category</th>
               <th>Description</th>
+              <th>Image</th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -103,6 +114,7 @@
         </table>
       </div>
     </div>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
   </body>
