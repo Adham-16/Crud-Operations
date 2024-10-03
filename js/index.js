@@ -18,10 +18,7 @@
     
 addBtn.addEventListener("click", function () {
     addProduct()
-//     console.log(localStorage.arrProduct);
-//     console.log(localStorage.productImage);
-// console.log('إجمالي الحجم:', JSON.stringify(localStorage).length);
-        
+    getLocalStorageUsage()
 })
 document.addEventListener("keypress", function(event) {
   if (event.key === "Enter" && validation()) {
@@ -70,7 +67,7 @@ function display() {
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <h5 class="card-name">${arrProduct[i].name}</h5>
-                <h5 class="card-title">${arrProduct[i].price}</h5>
+                <h5 class="card-title">${arrProduct[i].price}$</h5>
               </div>
               <h5 class="card-title">${arrProduct[i].category}</h5>
               <p class="card-text">
@@ -184,12 +181,14 @@ document.getElementById("Product").innerHTML= stack;
         return Product;
         }
     function validation() {
-        return /^[A-Z][\w ]{2,19}$/.test(productNameInput.value)
-        &&/^[1-9][0-9]*$/.test(productPriceInput.value) 
-        && productCategoryInput.value !== ""
-        && productDescInput.value !== ""
-        && productImage.value !== ""
-    }
+    const isValidName = /^[A-Z][\w ]{2,19}$/.test(productNameInput.value);
+    const isValidPrice = /^[1-9][0-9]*$/.test(productPriceInput.value);
+    const isCategorySelected = productCategoryInput.value !== "";
+    const isDescProvided = productDescInput.value !== "";
+    const isImageProvided = productImage.value !== "";
+
+    return isValidName && isValidPrice && isCategorySelected && isDescProvided && isImageProvided;
+}
 
     function productValidate() {
     if (/^[A-Z][\w ]{2,19}$/.test(productNameInput.value)) {
@@ -253,6 +252,19 @@ productImage.addEventListener('change', function () {
 
 
 
+function getLocalStorageUsage() {
+    let total = 0;
+    for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+            total += (localStorage[key].length + key.length) * 2;         }
+    }
+    const usedSpace = total;
+    const maxStorageSize = 5 * 1024 * 1024; 
+    const availableSpace = maxStorageSize - usedSpace;
+    if (usedSpace > 5000000 && availableSpace < 0) {
+        alert("You have exceeded the total storage limit. Please use smaller images or remove some items.")
+    }
+}
 
 
 
