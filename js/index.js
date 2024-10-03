@@ -57,18 +57,35 @@ function display() {
             arrProduct[i].price.toString().includes(searchTerm) ||
             arrProduct[i].category.toLowerCase().includes(searchTerm) ||
             arrProduct[i].desc.toLowerCase().includes(searchTerm)) {
-        stack  +=   `<tr>
-            <td> ${i} </td>
-            <td>${arrProduct[i].name}</td>
-            <td>${arrProduct[i].price}</td>
-            <td>${arrProduct[i].category}</td>
-            <td>${arrProduct[i].desc}</td>
-            <td class="image"><img src="${arrProduct[i].image}" alt="productImage" style="max-width: 100px;"></td>
-            <td><button onclick="semiUpdate(${i})"  class="btn btn-outline-warning">Update</button></td>
-            <td><button onclick="deleteProduct(${i})" class="btn btn-outline-danger">Delete</button></td>
-            </tr>`
+        stack  +=   `
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+          <div class="card">
+          <div class="w-100 h-100 mx-auto">
+            <img
+              src="${arrProduct[i].image}"
+              class="card-img-top  "
+              alt="..."
+            />
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="card-name">${arrProduct[i].name}</h5>
+                <h5 class="card-title">${arrProduct[i].price}</h5>
+              </div>
+              <h5 class="card-title">${arrProduct[i].category}</h5>
+              <p class="card-text">
+                ${arrProduct[i].desc}
+              </p>
+              <div class="d-flex justify-content-between">
+                <button onclick="semiUpdate(${i})" class="btn btn-outline-warning">Update</button>
+                <button onclick="deleteProduct(${i})" class="btn btn-outline-danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    `
     }}
-document.getElementById("tableBody").innerHTML= stack;
+document.getElementById("Product").innerHTML= stack;
 }
         function clear() {
             productNameInput.value ="";

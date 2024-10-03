@@ -6,9 +6,22 @@
 .container textarea::placeholder {
   font-weight: 600;
 }
-table tbody tr td.image {
-  width: 20%;
+.card-img-top {
+  width: 100%;
+  height: 150px;
 }
-table tbody tr td img {
-  width: 10%;
+.card-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  height: 6em;
+  font-size: 14px;
+}
+.card-name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  font-size: 20px;
 }
