@@ -224,7 +224,7 @@ productImage.addEventListener('change', function () {
 
     if (file) {
         const fileSizeInKB = file.size / 1024;
-        const maxSizeInKB = 500;
+        const maxSizeInKB = 300;
         
         if (fileSizeInKB > maxSizeInKB) {
             productImageSizeAlert.classList.remove("d-none"); 
@@ -245,11 +245,6 @@ productImage.addEventListener('change', function () {
         reader.readAsDataURL(file);
     }
 });
-
-
-
-
-
 
 
 function getLocalStorageUsage() {
