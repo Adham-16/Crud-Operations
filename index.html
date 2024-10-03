@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>CRUD</title>
+    <link rel="icon" href="css/operational-system.png" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -78,6 +79,9 @@
         <div id="productImageAlert" class="alert alert-danger mt-2 d-none">
           Product Image is required.
         </div>
+        <div id="productImageSizeAlert" class="alert alert-danger mt-2 d-none">
+          Image size must be less than 500KB.
+        </div>
       </div>
 
       <button id="addBtn" class="btn btn-primary">Add Product</button>
@@ -96,26 +100,27 @@
       </div>
 
       <!-- Table to display products -->
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Image</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
+      <div class="Product">
+        <div class="card d-flex align-items-center" style="width: 18rem">
+          <img
+            src="css/operational-system.png"
+            class="card-img-top w-50"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
       </div>
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

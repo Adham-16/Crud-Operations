@@ -18,6 +18,10 @@
     
 addBtn.addEventListener("click", function () {
     addProduct()
+//     console.log(localStorage.arrProduct);
+//     console.log(localStorage.productImage);
+// console.log('إجمالي الحجم:', JSON.stringify(localStorage).length);
+        
 })
 document.addEventListener("keypress", function(event) {
   if (event.key === "Enter" && validation()) {
@@ -31,6 +35,12 @@ function addProduct(){
     if (validation()  ) {
         if (!updateMood) {
         arrProduct.push( getProduct());
+            Swal.fire({
+            title: "Success!",
+            text: "The product was added successfully!",
+            icon: "success",
+            timer: 1500
+        });
         }else{
             update(getProduct());
         }
@@ -66,6 +76,7 @@ document.getElementById("tableBody").innerHTML= stack;
             productCategoryInput.value="";
             productDescInput.value="";
             productImage.value ="";
+            imagePreview.value ="";
             clearErrors()
         }
         function change() {
@@ -73,13 +84,48 @@ document.getElementById("tableBody").innerHTML= stack;
             display();
         }
         function deleteProduct(index) {
-            arrProduct.splice(index,1)
-            change()
-            clear()
-            addBtn.innerHTML="Add Product";
-            updateMood =false;
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success",
+                    timer: 1500
+                    });
+                    arrProduct.splice(index,1)
+                    change()
+                    clear()
+                    addBtn.innerHTML="Add Product";
+                    updateMood =false;
+                }
+                });
+            
         }
         function semiUpdate(index) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: true,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+                });
+                Toast.fire({
+                icon: "warning",
+                title: "The product is updating!"
+                });
             clearErrors()
             updateMood=true
             maineIndex =index;
@@ -100,6 +146,12 @@ document.getElementById("tableBody").innerHTML= stack;
         }
         function update(Product) {
             arrProduct.splice(maineIndex,1,Product)
+            Swal.fire({
+            title: "Success!",
+            text: "The product was updated successfully!",
+            icon: "success",
+            timer: 1500
+        });
             // arrProduct[maineIndex]= Product;
             addBtn.innerHTML="Add Product";
             updateMood =false;
@@ -149,6 +201,41 @@ document.getElementById("tableBody").innerHTML= stack;
         productImageAlert.classList.remove("d-none")
     }
 }
+
 productImage.addEventListener('change', function () {
-    imagePreview.src = window.URL.createObjectURL(this.files[0]); 
+    const file = this.files[0];
+    const productImageSizeAlert = document.getElementById("productImageSizeAlert");
+
+    if (file) {
+        const fileSizeInKB = file.size / 1024;
+        const maxSizeInKB = 500;
+        
+        if (fileSizeInKB > maxSizeInKB) {
+            productImageSizeAlert.classList.remove("d-none"); 
+            productImage.value = "";
+            imagePreview.src = "#";
+            return;
+        } else {
+            productImageSizeAlert.classList.add("d-none");
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const base64Image = event.target.result;
+            imagePreview.src = base64Image;
+
+            localStorage.setItem("productImage", base64Image);
+        };
+        reader.readAsDataURL(file);
+    }
 });
+
+
+
+
+
+
+
+
+
+
