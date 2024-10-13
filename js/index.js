@@ -55,7 +55,7 @@ function display() {
             arrProduct[i].category.toLowerCase().includes(searchTerm) ||
             arrProduct[i].desc.toLowerCase().includes(searchTerm)) {
         stack  +=   `
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+        <div class="col-lg-3 col-md-4 col-sm-6 ">
           <div class="card">
           <div class="w-100 h-100 mx-auto">
             <img
